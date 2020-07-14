@@ -1237,6 +1237,11 @@ PrefabInstance:
       propertyPath: axisOptions
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8170153791668043265, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: deadZone
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1881,10 +1886,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 1766613336}
-  joystickDeadzone: 0.151
-  maxSpeed: 6
+  maxSpeed: 14
   jumpForce: 6
   jumpRequestDuration: 0.5
+  jumpCooldown: 0.2
 --- !u!1 &1585953341
 GameObject:
   m_ObjectHideFlags: 0
