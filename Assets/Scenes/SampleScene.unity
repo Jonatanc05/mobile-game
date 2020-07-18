@@ -753,6 +753,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -768,6 +769,20 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29df112c1fc43743af29d363b38ef49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravMultiplier: 15
+  screenLog: {fileID: 1766579156}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1886,10 +1901,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 1766613336}
-  maxSpeed: 14
-  jumpForce: 6
+  acceleration: 35
+  jumpForce: 8
   jumpRequestDuration: 0.5
   jumpCooldown: 0.2
+  maxCollision: 14
+  screenLog: {fileID: 1766579156}
 --- !u!1 &1585953341
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,7 +2267,7 @@ GameObject:
   - component: {fileID: 1766579156}
   - component: {fileID: 1766579158}
   m_Layer: 5
-  m_Name: GyroValues
+  m_Name: ScreenLog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2265,7 +2282,7 @@ RectTransform:
   m_GameObject: {fileID: 1766579154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2375, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 2093895548}
   m_RootOrder: 1
@@ -2328,9 +2345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29df112c1fc43743af29d363b38ef49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: {fileID: 1766579156}
-  arrow: {fileID: 1766579155}
-  gravMultiplier: 10
+  gravMultiplier: 15
+  screenLog: {fileID: 0}
 --- !u!114 &1766613336 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8170153791668043265, guid: 0d230cc8be529a542a08cb878ab14b18,

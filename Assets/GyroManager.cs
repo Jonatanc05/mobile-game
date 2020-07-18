@@ -4,54 +4,59 @@ using UnityEngine;
 
 public class GyroManager : MonoBehaviour {
 
-    public UnityEngine.UI.Text values;
-    public Transform arrow;
-    public float gravMultiplier;
-
-    private Gyroscope gyro;
-    private bool gyroActive;
-	private bool floating;
+	public float gravMultiplier;
+	public UnityEngine.UI.Text screenLog;
 	
-	void Start() {
+	private Gyroscope gyro;
+	private bool gyroActive;
+	private bool plain;
+	
+	void Awake() {
 		EnableGyro();
-		floating = false;
+		plain = false;
 	}
 
-    public void EnableGyro() {
-        if (gyroActive)
-            return;
+	public void EnableGyro() {
+		if (gyroActive)
+			return;
 
-        if (SystemInfo.supportsGyroscope) {
-            gyro = Input.gyro;
-            gyroActive = gyro.enabled = true;
-        }
+		if (SystemInfo.supportsGyroscope) {
+			gyro = Input.gyro;
+			gyroActive = gyro.enabled = true;
+		}
 		
-        if (!gyroActive)
-		values.text = "Giroscópio não suportado";
+		if (!gyroActive)
+			screenLog.text = "Giroscópio não suportado";
 
-    }
+	}
 
-    private void Update() {
+	private void Update() {
 		if (!gyroActive)
 			return;
 		
 		Quaternion rot = gyro.attitude;
-        Vector2 down = new Vector2(gyro.gravity.x, gyro.gravity.y).normalized * gravMultiplier;
+		Vector2 down = new Vector2(gyro.gravity.x, gyro.gravity.y).normalized * gravMultiplier;
 
-        if (Mathf.Abs(rot.x) < 0.15f && Mathf.Abs(rot.y) < 0.15f) {
-			values.text = "Dispositivo em uma superfície plana.\nLevante o dispositivo.";
-            arrow.rotation = Quaternion.Euler(0f, 0f, VectorToAngle(down) + 90f);
-            return;
+		if (Mathf.Abs(rot.x) < 0.15f && Mathf.Abs(rot.y) < 0.15f) {
+			if (!plain) {
+				if (screenLog != null)
+					screenLog.text = "Dispositivo em uma superfície plana bobão.\nLevanta o celular, o jogo precisa de gravidade";
+				plain = true;
+			}
+			return;
+		} else if (plain) {
+			plain = false;
+			if (screenLog != null)
+				screenLog.text = "";
 		}
-        values.text = "";
 
-        Physics2D.gravity = down;
-    }
+		Physics2D.gravity = down;
+	}
 
-    private float VectorToAngle(Vector2 v) {
-        return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
-    }
+	private float VectorToAngle(Vector2 v) {
+		return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
+	}
 
-    public Quaternion GetRotation() => gyro.attitude;
+	public Quaternion GetRotation() => gyro.attitude;
 
 }
