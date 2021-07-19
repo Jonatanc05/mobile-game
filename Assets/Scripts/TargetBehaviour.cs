@@ -8,7 +8,8 @@ public class TargetBehaviour : MonoBehaviour {
 	public UnityEngine.UI.Text screenLog;
 
 	public void OnTriggerEnter2D(Collider2D col) {
-		screenLog.text = "boa";
+		if (col.tag == "Player")
+			screenLog.text = "boa";
 	}
 
 }
