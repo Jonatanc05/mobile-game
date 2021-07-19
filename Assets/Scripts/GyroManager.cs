@@ -6,11 +6,12 @@ public class GyroManager : MonoBehaviour {
 
 	public float gravMultiplier;
 	public UnityEngine.UI.Text screenLog;
-	
+	public GameObject level;
+
 	private Gyroscope gyro;
 	private bool gyroActive;
 	private bool plain;
-	
+
 	void Awake() {
 		EnableGyro();
 		plain = false;
@@ -24,7 +25,7 @@ public class GyroManager : MonoBehaviour {
 			gyro = Input.gyro;
 			gyroActive = gyro.enabled = true;
 		}
-		
+
 		if (!gyroActive)
 			screenLog.text = "Giroscópio não suportado";
 
@@ -33,7 +34,7 @@ public class GyroManager : MonoBehaviour {
 	private void Update() {
 		if (!gyroActive)
 			return;
-		
+
 		Quaternion rot = gyro.attitude;
 		Vector2 down = new Vector2(gyro.gravity.x, gyro.gravity.y).normalized * gravMultiplier;
 
@@ -51,6 +52,7 @@ public class GyroManager : MonoBehaviour {
 		}
 
 		Physics2D.gravity = down;
+		level.transform.localEulerAngles = new Vector3(level.transform.localEulerAngles.x, level.transform.localEulerAngles.y, 90f + VectorToAngle(down));
 	}
 
 	private float VectorToAngle(Vector2 v) {
