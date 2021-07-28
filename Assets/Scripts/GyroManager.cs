@@ -7,14 +7,20 @@ public class GyroManager : MonoBehaviour {
 	public float gravMultiplier;
 	public UnityEngine.UI.Text screenLog;
 	public GameObject level;
+	public bool debug;
 
 	private Gyroscope gyro;
+	private float levelAngle;
 	private bool gyroActive;
 	private bool plain;
+	private bool freezed;
+	private Vector2 lastGravity;
 
 	void Awake() {
 		EnableGyro();
+		levelAngle = 90f;
 		plain = false;
+		freezed = false;
 	}
 
 	public void EnableGyro() {
@@ -32,7 +38,11 @@ public class GyroManager : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (!gyroActive)
+		if (debug) {
+			Debug.DrawLine(Vector3.zero, Vector3.zero + (Vector3) (Vector2) gyro.gravity.normalized, new Color(0.8f, 0.2f, 0.57f, 1f), 0f, false);
+			Debug.DrawLine(Vector3.zero, Vector3.zero + (Vector3) lastGravity, Color.red, 0f, false);
+		}
+		if (!gyroActive || freezed)
 			return;
 
 		Quaternion rot = gyro.attitude;
@@ -52,13 +62,25 @@ public class GyroManager : MonoBehaviour {
 		}
 
 		Physics2D.gravity = down;
-		level.transform.localEulerAngles = new Vector3(level.transform.localEulerAngles.x, level.transform.localEulerAngles.y, 90f + VectorToAngle(down));
+		level.transform.localEulerAngles = new Vector3(level.transform.localEulerAngles.x, level.transform.localEulerAngles.y, levelAngle + VectorToAngle(down));
+	}
+
+	public Quaternion GetRotation() => gyro.attitude;
+
+	public void ToggleRotation() {
+		freezed = !freezed;
+		if (freezed) {
+			// zerar velocidades
+			lastGravity = Physics2D.gravity;
+		} else {
+			float lastAngle = VectorToAngle(lastGravity);
+			float gyroAngle = VectorToAngle((Vector2) gyro.gravity);
+			levelAngle += lastAngle - gyroAngle;
+		}
 	}
 
 	private float VectorToAngle(Vector2 v) {
 		return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
 	}
-
-	public Quaternion GetRotation() => gyro.attitude;
 
 }

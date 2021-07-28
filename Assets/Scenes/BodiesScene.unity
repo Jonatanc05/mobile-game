@@ -547,7 +547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &360399177
 RectTransform:
   m_ObjectHideFlags: 0
@@ -564,8 +564,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 14, y: -214}
+  m_SizeDelta: {x: 89, y: 77.63756}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &360399178
 MonoBehaviour:
@@ -609,7 +609,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 360399179}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1413872642}
+        m_MethodName: ToggleRotation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &360399179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,8 +640,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 56e1bdcd4f2bc8743968f4a2d29afeb2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2003,7 +2014,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162028074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0295707, y: -0.9178128, z: -1613.8926}
+  m_LocalPosition: {x: 0, y: 0, z: -624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1114615792}
@@ -2193,6 +2204,7 @@ MonoBehaviour:
   gravMultiplier: 15
   screenLog: {fileID: 2043883887}
   level: {fileID: 1162028074}
+  debug: 1
 --- !u!81 &1413872643
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2252,7 +2264,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413872641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -1, y: 0.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2406,6 +2418,7 @@ MonoBehaviour:
   gravMultiplier: 15
   screenLog: {fileID: 0}
   level: {fileID: 0}
+  debug: 0
 --- !u!222 &2043883889
 CanvasRenderer:
   m_ObjectHideFlags: 0
