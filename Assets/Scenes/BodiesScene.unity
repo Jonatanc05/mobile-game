@@ -317,6 +317,7 @@ MonoBehaviour:
   jumpCooldown: 0.2
   maxCollision: 14
   screenLog: {fileID: 2043883887}
+  spawnTransf: {fileID: 1353402421}
 --- !u!61 &128375544
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1503,8 +1504,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 128375542}
-  screenLog: {fileID: 2043883887}
-  playerSpawn: {x: 3.41, y: -3.29}
 --- !u!66 &783025162
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -2020,6 +2019,7 @@ Transform:
   - {fileID: 1114615792}
   - {fileID: 128375547}
   - {fileID: 909609604}
+  - {fileID: 1353402421}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2170,6 +2170,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1353402420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1353402421}
+  m_Layer: 0
+  m_Name: player spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1353402421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353402420}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.3804293, y: -2.3721871, z: 1613.8926}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1162028075}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1413872641
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,7 +2238,7 @@ MonoBehaviour:
   freeRotationSprite: {fileID: 21300000, guid: 48e6aea083a19fe4daa14677fee4094d, type: 3}
   frozenRotationSprite: {fileID: 21300000, guid: 1a6821d2f072bd344b7081b5ec182ee0,
     type: 3}
-  debug: 1
+  debug: 0
 --- !u!81 &1413872643
 AudioListener:
   m_ObjectHideFlags: 0

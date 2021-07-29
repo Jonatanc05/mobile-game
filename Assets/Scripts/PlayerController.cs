@@ -13,13 +13,13 @@ public class PlayerController : MonoBehaviour {
 	public float jumpCooldown;
 	public float maxCollision;
     public UnityEngine.UI.Text screenLog;
-    
+	public Transform spawnTransf;
+
     private Rigidbody2D rb;
 	private BoxCollider2D playerCollider;
 	//private LayerMask groundLayerIndex;
 	private float jumpReqRemainingTime;
 	private float jumpReqRemainingCooldown;
-    private Vector2 spawnPoint;
 	private PVector2 appliedVelocity;
 	private bool jumpRequest;
 	private PVector2 right;
@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour {
 	void Start() {
 		rb = GetComponent<Rigidbody2D>();
 		playerCollider = GetComponent<BoxCollider2D>();
-        spawnPoint = transform.position;
 		appliedVelocity = PVector2.zero;
 		up = PVector2.up;
 		right = PVector2.right;
@@ -68,6 +67,12 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
+	void OnCollisionEnter2D(Collision2D collision) {
+		if (new PVector2(collision.relativeVelocity).ScaleOfProjectionOn(up) > maxCollision) {
+			Die("ih ala morreu de queda kkkkkkkkkk");
+		}
+	}
+
 	public bool IsGrounded() {
 		ContactPoint2D[] contacts = new ContactPoint2D[8];
 		playerCollider.GetContacts(contacts);
@@ -77,26 +82,17 @@ public class PlayerController : MonoBehaviour {
 		}
 		return false;
 	}
-	
-	void OnCollisionEnter2D(Collision2D collision) {
-        if (new PVector2(collision.relativeVelocity).ScaleOfProjectionOn(up) > maxCollision) {
-            transform.position = spawnPoint;
-            StartCoroutine("FallDamageMessage");
-        }
+
+	public void Die(string message, float time = 8f) {
+		transform.position = spawnTransf.position;
+		rb.velocity = Vector2.zero;
+		StartCoroutine(FallDamageMessage(message, time));
 	}
 
-    private IEnumerator FallDamageMessage() {
-        screenLog.text = "ih ala morreu de queda kkkkkkkkkkkkkkkk";
-        yield return new WaitForSeconds(8);
+    private IEnumerator FallDamageMessage(string message, float time = 8f) {
+        screenLog.text = message;
+        yield return new WaitForSeconds(time);
         screenLog.text = "";
     }
 
 }
-/*
-[X] Encapsular Vector2 para projeção
-[X] Velocidade máxima sem contar gravidade
-[ ] Morrer e renascer quando sofrer impacto forte
-[ ] Botão para não girar cenário junto com o celular enquanto pressionado
-[ ] Level número 0: Tutorial/level fácil pro jogador aprender sozinho
-[ ] Level número Alface: Portal
-*/
