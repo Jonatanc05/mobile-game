@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GyroManager : MonoBehaviour {
 
 	public float gravMultiplier;
 	public UnityEngine.UI.Text screenLog;
 	public GameObject level;
+	public GameObject toggleRotButton;
+	public Sprite freeRotationSprite;
+	public Sprite frozenRotationSprite;
 	public bool debug;
 
 	private Gyroscope gyro;
@@ -15,12 +17,14 @@ public class GyroManager : MonoBehaviour {
 	private bool plain;
 	private bool freezed;
 	private Vector2 lastGravity;
+	private Image togRotButImage;
 
 	void Awake() {
 		EnableGyro();
 		levelAngle = 90f;
 		plain = false;
 		freezed = false;
+		togRotButImage = toggleRotButton.GetComponent<Image>();
 	}
 
 	public void EnableGyro() {
@@ -72,10 +76,12 @@ public class GyroManager : MonoBehaviour {
 		if (freezed) {
 			// zerar velocidades
 			lastGravity = Physics2D.gravity;
+			togRotButImage.sprite = frozenRotationSprite;
 		} else {
 			float lastAngle = VectorToAngle(lastGravity);
 			float gyroAngle = VectorToAngle((Vector2) gyro.gravity);
 			levelAngle += lastAngle - gyroAngle;
+			togRotButImage.sprite = freeRotationSprite;
 		}
 	}
 
