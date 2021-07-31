@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class GyroManager : MonoBehaviour {
 
+	public Rigidbody2D[] gravitatedBodies;
 	public float gravMultiplier;
 	public UnityEngine.UI.Text screenLog;
 	public GameObject level;
@@ -74,9 +75,11 @@ public class GyroManager : MonoBehaviour {
 	public void ToggleRotation() {
 		freezed = !freezed;
 		if (freezed) {
-			// zerar velocidades
-			lastGravity = Physics2D.gravity;
 			togRotButImage.sprite = frozenRotationSprite;
+			lastGravity = Physics2D.gravity;
+			Physics2D.gravity = Vector2.zero;
+			foreach (Rigidbody2D rb in gravitatedBodies)
+				rb.velocity = Vector2.zero;
 		} else {
 			float lastAngle = VectorToAngle(lastGravity);
 			float gyroAngle = VectorToAngle((Vector2) gyro.gravity);

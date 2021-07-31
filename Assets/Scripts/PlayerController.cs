@@ -84,12 +84,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Die(string message, float time = 8f) {
-		transform.position = spawnTransf.position;
-		rb.velocity = Vector2.zero;
-		StartCoroutine(FallDamageMessage(message, time));
+		GameMaster.instance.ResetAll();
+		StartCoroutine(Message(message, time));
 	}
 
-    private IEnumerator FallDamageMessage(string message, float time = 8f) {
+    private IEnumerator Message(string message, float time = 8f) {
         screenLog.text = message;
         yield return new WaitForSeconds(time);
         screenLog.text = "";
